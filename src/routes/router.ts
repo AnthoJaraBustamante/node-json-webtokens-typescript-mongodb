@@ -8,6 +8,8 @@ import {
 import { TokenValidation } from "../lib/verify_token";
 
 const router: Router = Router();
+
+ 
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/profile", TokenValidation, profile);

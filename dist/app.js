@@ -11,5 +11,10 @@ app.set('port', process.env.PORT || 3000);
 app.use((0, morgan_1.default)('dev'));
 app.use(express_1.default.json());
 //routes
+app.get("/", (req, res) => {
+    res.json({
+        message: "Hello World"
+    });
+});
 app.use('/api/v1/auth/', router_1.default);
 exports.default = app;
