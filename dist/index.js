@@ -4,7 +4,7 @@ const tslib_1 = require("tslib");
 const dotenv_1 = (0, tslib_1.__importDefault)(require("dotenv"));
 const app_1 = (0, tslib_1.__importDefault)(require("./app"));
 require("./database");
-const PORT = app_1.default.get('port');
+const PORT = process.env.PORT || 3000;
 //Crear funcion main
 function main() {
     dotenv_1.default.config();

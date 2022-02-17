@@ -5,7 +5,7 @@ import './database';
 
 
 
-const PORT = app.get('port');
+const PORT =  process.env.PORT || 3000;
 
 
 //Crear funcion main
