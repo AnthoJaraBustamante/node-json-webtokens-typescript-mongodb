@@ -1,0 +1,122 @@
+https://parzibyte.me/blog/2019/12/11/publicar-app-node-js-heroku/
+
+En este artículo vas a aprender cómo subir tu aplicación web de Node.js en Heroku, sin importar el framework que uses (por ejemplo, express) de manera fácil, rápida y gratuita.
+
+Tabla de contenido  ocultar 
+1 ¿Qué vamos a hacer?
+2 Login en Heroku
+3 Preparar proyecto
+4 Procfile en node
+5 Ajustar puerto
+6 Ahora sí, publicar
+7 Actualizar app
+8 Conclusión y notas finales
+Recuerda que para publicar tu app de Node en Heroku debes tener una cuenta de Heroku (no importa si es gratuita) e instalar la CLI de Heroku.
+
+También debes contar con Git, si no lo tienes, mira cómo comenzar con GitHub desktop.
+
+
+¿Qué vamos a hacer?
+Te voy a mostrar un ejemplo para publicar una app de Node.js a la nube en Heroku. En concreto, usaré una app de demostración de express que publiqué hace tiempo.
+
+En resumen es:
+
+Instalar CLI de heroku
+Agregar git a tu proyecto (o clonarlo si ya lo usas)
+Usar heroku login para iniciar sesión
+Ejecutar heroku create nombre_de_app dentro de tu proyecto
+Crear Procfile y ajustar puerto en caso de que tu app sea web
+Ejecutar git push heroku master
+Probar tu app web
+Login en Heroku
+Una vez que tengas la CLI de heroku ejecuta:
+
+heroku login
+
+Login con Heroku
+Iniciar sesión en Heroku desde la cli de Heroku
+
+Inicia sesión en el navegador, autoriza la app y listo.
+
+Preparar proyecto
+Tu proyecto debe ser un proyecto de Git, ya mencioné que puedes usar Github desktop. Si sabes usar la línea de comandos de git también es válido, el punto es que tu proyecto debe usar git.
+
+Abre la línea de comandos y navega a tu proyecto (cd nombre_de_proyecto), después ejecuta:
+
+heroku create nombre-de-tu-app
+
+heroku create dentro del proyecto
+
+Eso modificará el repositorio de git para que luego lo puedas publicar en Heroku.
+
+Por otro lado, en tu app debe estar definido el package.json pues Heroku leerá las dependencias del mismo e instalará los módulos por ti.
+
+Ahora necesitamos dos cosas:
+
+El Procfile
+Ajustar el puerto, en caso de que tu app sea una app web
+Procfile en node
+Este archivo indica cómo se va a ejecutar tu app de Node en Heroku. Cuando desarrollamos localmente probablemente escribimos:
+
+node index.js
+
+Exactamente eso debemos indicar en el Procfile, así:
+
+web: node index.js
+view rawProcfile hosted with ❤ by GitHub
+Como puedes ver, es un archivo sin extensión. Indica que el tipo de proceso es web, y para ejecutarse debe invocar a node index.js
+
+Haz commit de este archivo como normalmente lo haces.
+
+Ajustar puerto
+En Heroku no vamos a tener cualquier puerto disponible, pues lo provee, digamos, el sistema. El puerto estará en process.env.PORT así que si tenemos un código algo así:
+
+const express = require("express"),
+    path = require("path"),
+    app = express(),
+    puerto = 3000; // <-- este es el puerto local
+view rawindex_mal.js hosted with ❤ by GitHub
+Debemos cambiarlo para que, si está definido el puerto en el entorno, use ese en su lugar. Así:
+
+const express = require("express"),
+    path = require("path"),
+    app = express(),
+    puerto = process.env.PORT || 3000; // Si está definido en el entorno, usarlo. Si no, el 3000
+view rawindex_ok.js hosted with ❤ by GitHub
+Fue un ejemplo, en tu código puedes definir el puerto en otro lugar, pero así es en el mío.
+
+También haz commit de este cambio, es decir, tu flujo de trabajo no va a cambiar, sigue subiendo tus cambios.
+
+Ahora sí, publicar
+Cuando hayas hecho commit y todo esté listo, ejecuta:
+
+git push heroku master
+
+Estamos subiendo nuestros cambios a la rama master de heroku. Verás algo así:
+
+Desplegando app de Node en Heroku
+
+Y al final te dará la URL de tu proyecto:
+
+URL del proyecto de Heroku
+Localizar web en donde está la app de Heroku
+
+La cual puedes visitar y estará lista para lo que quieras:
+
+
+
+Actualizar app
+Si después haces cambios en tu aplicación, haz lo siguiente:
+
+Cambia el código, plantilla, archivo necesario
+Haz commit y sube tus cambios a GitHub como normalmente se hace
+Después ejecuta (dentro del directorio de tu app) git push heroku master y tu app será desplegada
+Conclusión y notas finales
+De este modo puedes subir tus apps de Node y Express (u otro framework) a la nube de manera gratuita y fácil. Recuerda que el plan gratuito tiene sus restricciones pero de eso no vamos a hablar aquí.
+
+Por cierto, por ahora vimos cómo hacerlo sin base de datos, en el futuro espero escribir sobre cómo usar las bases de datos de Heroku.
+
+Mira el código del proyecto en mi GitHub. Aprende en mi blog más cosas sobre JavaScript en general
+
+Estoy disponible para trabajar en tu proyecto o realizar tu tarea pendiente, no dudes en ponerte en contacto conmigo.
+Si el post fue de tu agrado muestra tu apoyo compartiéndolo, suscribiéndote al blog, siguiéndome o realizando una donación.
