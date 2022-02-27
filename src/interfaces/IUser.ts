@@ -1,10 +1,17 @@
-import { Document } from 'mongoose';
-
+import { Document } from "mongoose";
+import { IPet } from "./IPet";
 
 export interface IUser extends Document {
-    username: string;
-    email: string;
-    password: string;
-    encryptPassword: (password: string) => Promise<string>;
-    validatePassword: (password: string) => Promise<boolean>;
+  fullname: string;
+  email: string;
+  password: string;
+  avatar: string;
+  address: string;
+  phone: string;
+  role: string;
+  createdAt: Date;
+  pet: [IPet];
+  encryptPassword: (password: string) => Promise<string>;
+  validatePassword: (password: string) => Promise<boolean>;
 }
+ 

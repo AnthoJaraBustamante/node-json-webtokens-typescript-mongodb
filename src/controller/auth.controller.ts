@@ -6,7 +6,7 @@ import User from "../models/userSchema";
 //metodo signup para el registro
 export const signup = async (req: Request, res: Response) => {
   const newUser: IUser = new User({
-    username: req.body.username,
+    fullname: req.body.fullname,
     email: req.body.email,
     password: req.body.password,
   });
@@ -73,7 +73,7 @@ export const signin = async (req: Request, res: Response) => {
   );
   res.send({
     success: true,
-    token: token,
+    token: token, 
     expiresIn: 60 * 60 * 24,
     user: user,
   });
@@ -87,16 +87,21 @@ export const profile = async (req: Request, res: Response) => {
       .status(400)
       .send({ success: false, message: "El usuario no existe" });
   }
-  res.send({
+  console.log(req);
+  res.send({ 
     success: true,
     user: user,
+    req: req.userId,  
   });
 };
 
 //metodo testing para probar el token
 export const testing = async (req: Request, res: Response) => {
-  res.send({
+  console.log(req);
+  res.send({  
     success: true,
-    message: "Token valido",
+    message: "Token válido",
+   
   });
-};
+};  
+  

@@ -1,0 +1,24 @@
+{
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/matthewkay_/128.jpg",
+    "address": "8982 Schmedeman Parkway, West Dixie, NE, 6091",
+    "phone": "(832) 547-3258",
+    "role": "admin",
+    "pet": [
+        {
+            "name": "Princesa",
+            "age": "11",
+            "genre": "female",
+            "weight": "60",
+            "size": "mediano",
+            "birthdate": "Mon Feb 21 2022 19:05:05 GMT-0500"
+        },
+        {
+            "name":"Peluchin",
+            "age":"10",
+            "genre":"male",
+            "weight":"60",
+            "size":"pequeño",
+            "birthdate":"2009-09-21"
+        }
+    ]
+}

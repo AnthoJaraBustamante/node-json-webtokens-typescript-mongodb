@@ -7,7 +7,7 @@ const userSchema_1 = (0, tslib_1.__importDefault)(require("../models/userSchema"
 //metodo signup para el registro
 const signup = async (req, res) => {
     const newUser = new userSchema_1.default({
-        username: req.body.username,
+        fullname: req.body.fullname,
         email: req.body.email,
         password: req.body.password,
     });
@@ -77,17 +77,20 @@ const profile = async (req, res) => {
             .status(400)
             .send({ success: false, message: "El usuario no existe" });
     }
+    console.log(req);
     res.send({
         success: true,
         user: user,
+        req: req.userId,
     });
 };
 exports.profile = profile;
 //metodo testing para probar el token
 const testing = async (req, res) => {
+    console.log(req);
     res.send({
         success: true,
-        message: "Token valido",
+        message: "Token válido",
     });
 };
 exports.testing = testing;
