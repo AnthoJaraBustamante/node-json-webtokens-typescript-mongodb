@@ -4,7 +4,7 @@ import { engine } from 'express-handlebars';
 import morgan from "morgan";
 import authRoutes from "./routes/router";
 
-
+ 
 const app: Application = express();
 //settings
 app.set("port", process.env.PORT || 3000);
