@@ -1,20 +1,20 @@
 import { Router } from "express";
 import {
-    profile,
-    signin,
-    signup,
-    testing
+  profile,
+  signin,
+  signup,
+  testing
 } from "../controller/auth.controller";
 import { addExtraInfo } from "../controller/extra_info.controller";
 import {
-    deletePetById,
-    getPets,
-    getPetsByName,
-    upload
+  deletePetById,
+  getPets,
+  getPetsByName
 } from "../controller/pets_crud.controller";
 import { TokenValidation } from "../lib/verify_token";
 
 const router: Router = Router();
+
 
 //auth routes
 router.post("/signup", signup);
@@ -31,7 +31,7 @@ router.get("/getPetsByName/:name", TokenValidation, getPetsByName);
 //delete pet by id
 router.delete("/deletePetById/:id", TokenValidation, deletePetById);
 // Servicio para subir archivos
-router.post("/upload", TokenValidation, upload);
+
 // Crear servicio para recibir imagenes
 router.get("/getImage/:image", (req, res) => {
   const image = req.params.image;

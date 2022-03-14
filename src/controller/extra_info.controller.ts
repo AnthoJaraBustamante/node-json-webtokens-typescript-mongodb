@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { IPet } from "../interfaces/IPet";
-import Pet from "../models/petSchema";
-import User from "../models/userSchema";
+import { IPet } from "../interfaces/pet.interface";
+import Pet from "../models/pet.schema";
+import User from "../models/user.schema";
 
 export const addExtraInfo = async (req: Request, res: Response) => {
   try {

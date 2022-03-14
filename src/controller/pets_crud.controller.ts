@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Pet from "../models/petSchema";
+import Pet from "../models/pet.schema";
 
 export const getPets = async (req: Request, res: Response) => {
   try {
@@ -46,25 +46,4 @@ export const deletePetById = async (req: Request, res: Response) => {
     });
   }
 };
-export const upload = async (req: any, res: Response) => {
-  if (!req.files) { 
-    res.status(400).send({
-      success: false,
-      message: "No se especificó un archivo",
-    });
-
-    try {
-      const file = req.files.image;
-      res.json({
-        success: false,
-        message: "Se subió",
-        file: file,
-      });
-    } catch (error) {
-      res.status(400).send({
-        success: false, 
-        message: "No se pudo subir el archivo",
-      });
-    }
-  }
-};
+ 

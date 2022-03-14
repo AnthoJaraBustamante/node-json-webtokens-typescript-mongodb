@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.addExtraInfo = void 0;
 const tslib_1 = require("tslib");
-const petSchema_1 = (0, tslib_1.__importDefault)(require("../models/petSchema"));
-const userSchema_1 = (0, tslib_1.__importDefault)(require("../models/userSchema"));
+const pet_schema_1 = (0, tslib_1.__importDefault)(require("../models/pet.schema"));
+const user_schema_1 = (0, tslib_1.__importDefault)(require("../models/user.schema"));
 const addExtraInfo = async (req, res) => {
     try {
-        const userById = await userSchema_1.default.findById(req.userId, { password: 0 });
+        const userById = await user_schema_1.default.findById(req.userId, { password: 0 });
         if (!userById) {
             return res
                 .status(400)
@@ -16,7 +16,7 @@ const addExtraInfo = async (req, res) => {
         for (const key in req.body.pet) {
             if (Object.prototype.hasOwnProperty.call(req.body.pet, key)) {
                 const element = req.body.pet[key];
-                const pet = new petSchema_1.default({
+                const pet = new pet_schema_1.default({
                     name: element.name,
                     age: element.age,
                     genre: element.genre,
@@ -31,14 +31,14 @@ const addExtraInfo = async (req, res) => {
                 console.log(savedPets);
             }
         }
-        const user = await userSchema_1.default.findByIdAndUpdate(req.userId, {
+        const user = await user_schema_1.default.findByIdAndUpdate(req.userId, {
             avatar: req.body.avatar,
             address: req.body.address,
             phone: req.body.phone,
             role: req.body.role,
             $push: { pet: savedPets },
         });
-        const updated = await userSchema_1.default.findById(req.userId, { password: 0 });
+        const updated = await user_schema_1.default.findById(req.userId, { password: 0 });
         res.status(200).send({
             success: true,
             message: "Extra info added successfully",

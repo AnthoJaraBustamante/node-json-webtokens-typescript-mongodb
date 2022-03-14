@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IPet } from "../interfaces/IPet";
+import { IPet } from "../interfaces/pet.interface";
 const reqString = { type: String, required: true };
 const petSchema = new Schema(
   {

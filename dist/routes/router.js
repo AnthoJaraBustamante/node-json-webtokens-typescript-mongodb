@@ -20,5 +20,9 @@ router.get("/getPetsByName/:name", verify_token_1.TokenValidation, pets_crud_con
 //delete pet by id
 router.delete("/deletePetById/:id", verify_token_1.TokenValidation, pets_crud_controller_1.deletePetById);
 // Servicio para subir archivos
-router.post("/upload", verify_token_1.TokenValidation, pets_crud_controller_1.upload);
+// Crear servicio para recibir imagenes
+router.get("/getImage/:image", (req, res) => {
+    const image = req.params.image;
+    res.sendFile(`${__dirname}/../uploads/${image}`);
+});
 exports.default = router;

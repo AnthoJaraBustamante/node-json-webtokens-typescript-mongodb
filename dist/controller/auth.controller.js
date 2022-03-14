@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.testing = exports.profile = exports.signin = exports.signup = void 0;
 const tslib_1 = require("tslib");
 const jsonwebtoken_1 = (0, tslib_1.__importDefault)(require("jsonwebtoken"));
-const userSchema_1 = (0, tslib_1.__importDefault)(require("../models/userSchema"));
+const user_schema_1 = (0, tslib_1.__importDefault)(require("../models/user.schema"));
 //metodo signup para el registro
 const signup = async (req, res) => {
-    const newUser = new userSchema_1.default({
+    const newUser = new user_schema_1.default({
         fullname: req.body.fullname,
         email: req.body.email,
         password: req.body.password,
@@ -20,7 +20,7 @@ const signup = async (req, res) => {
         // asignando token
         const token = jsonwebtoken_1.default.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET || "mysecret", { expiresIn: 60 * 60 * 24 });
         //ocultando password de la respuesta usuario
-        const user = await userSchema_1.default.findById(savedUser._id, { password: 0 });
+        const user = await user_schema_1.default.findById(savedUser._id, { password: 0 });
         //enviando respuesta
         res.send({
             success: true,
@@ -45,7 +45,7 @@ exports.signup = signup;
 //metodo signin para el login
 const signin = async (req, res) => {
     //al especificar password: 0 es para que no lo muestre
-    const foundUser = await userSchema_1.default.findOne({ email: req.body.email });
+    const foundUser = await user_schema_1.default.findOne({ email: req.body.email });
     if (!foundUser) {
         console.log("El email no existe");
         return res
@@ -59,7 +59,7 @@ const signin = async (req, res) => {
             .status(400)
             .send({ success: false, message: "La contraseña es incorrecta" });
     }
-    const user = await userSchema_1.default.findById(foundUser._id, { password: 0 });
+    const user = await user_schema_1.default.findById(foundUser._id, { password: 0 });
     const token = jsonwebtoken_1.default.sign({ _id: foundUser._id }, process.env.TOKEN_SECRET || "mysecret", { expiresIn: 60 * 60 * 24 });
     res.send({
         success: true,
@@ -71,7 +71,7 @@ const signin = async (req, res) => {
 exports.signin = signin;
 // metodo profile para ver los datos del usuario
 const profile = async (req, res) => {
-    const user = await userSchema_1.default.findById(req.userId, { password: 0 });
+    const user = await user_schema_1.default.findById(req.userId, { password: 0 });
     if (!user) {
         return res
             .status(400)

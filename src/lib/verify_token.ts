@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { IPayload } from '../interfaces/IPayload';
+import { IPayload } from '../interfaces/payload.interface';
 
 export const TokenValidation = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('auth-token');

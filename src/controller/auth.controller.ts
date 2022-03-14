@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { IUser } from "../interfaces/IUser";
-import User from "../models/userSchema";
+import { IUser } from "../interfaces/user.interface";
+import User from "../models/user.schema";
 
 //metodo signup para el registro
 export const signup = async (req: Request, res: Response) => {

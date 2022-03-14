@@ -1,5 +1,5 @@
 import { Document } from "mongoose";
-import { IUser } from "./IUser";
+import { IUser } from "./user.interface";
 
 export interface IPet extends Document {
   name: string;
